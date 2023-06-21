@@ -1,6 +1,29 @@
+import React, { useState } from 'react'
+import { Link, useNavigate } from "react-router-dom";
+import Badge from "@material-ui/core/Badge";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { useCart } from './ContextReducer';
+import Modal from '../Modal';
+import Cart from '../screens/Cart';
+export default function Navbar(props) {
 
+    const [cartView, setCartView] = useState(false)
+    localStorage.setItem('temp', "first")
+    let navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('token')
+
+        navigate("/login")
+    }
+
+    const loadCart = () => {
+        setCartView(true)
+    }
+
+    const items = useCart();
+    return (
         <div>
-            < className="navbar navbar-expand-lg navbar-dark bg-success position-sticky"
+            <nav className="navbar navbar-expand-lg navbar-dark bg-success position-sticky"
                 style={{ boxShadow: "0px 10px 20px black", filter: 'blur(20)', position: "fixed", zIndex: "10", width: "100%" }}>
                 <div className="container-fluid">
                     <Link className="navbar-brand fs-1 fst-italic" to="/">GoFood</Link>
@@ -36,6 +59,8 @@
                                 <button onClick={handleLogout} className="btn bg-white text-success" >Logout</button></div>}
                     </div>
                 </div>
-                </nav>
+            </nav>
         </div>
     )
+}
+      
