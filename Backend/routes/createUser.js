@@ -1,6 +1,7 @@
 //aquiring the dependencies
 const express = require("express");
 const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
 
 //setting the router path
 const router = express.Router();
@@ -24,7 +25,17 @@ router.post("/register", async (req, res) => {
       );
     }
 
-    const user = new User({ name, email, location, password });
+    //pasword hashing
+    const salt = await bcrypt.genSalt(10);
+    let secpass = await bcrypt.hash(password, salt);
+
+    //saving details of the user
+    const user = new User({
+      name: name,
+      email: email,
+      location: location,
+      password: secpass,
+    });
 
     await user.save();
 

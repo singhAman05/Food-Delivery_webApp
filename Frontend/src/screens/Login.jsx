@@ -1,7 +1,7 @@
 //importing dependencies
 import React from "react";
 import { useFormik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, json, useNavigate } from "react-router-dom";
 import { login_validation } from "../validation/login_validation";
 
 //initials values to the feild
@@ -42,6 +42,7 @@ const Login = () => {
       console.log("not done");
     } else {
       console.log("can be logged in");
+      localStorage.setItem("authToken", json.authToken);
       navigate("/");
     }
   };
