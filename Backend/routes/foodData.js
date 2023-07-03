@@ -19,4 +19,5 @@ router.post('/foodData', async (req, res) => {
         res.send("Server Error")
 
     }
-})
+});
+module.exports = router;
