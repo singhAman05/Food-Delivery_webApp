@@ -26,6 +26,9 @@ app.use(bodyparse.urlencoded({ extended: true }));
 
 //path for registering users
 app.use("/signup", require("./routes/createUser"));
+app.use("/api", require("./routes/display_items"));
+app.use("/", require("./routes/loginUser"));
+app.use("/", require("./routes/user_order"));
 
 //accessing local backend index server
 app.get("/", (req, res) => {
