@@ -38,16 +38,21 @@ const Signup = () => {
         location,
         password,
       }),
-    });
-    const data = res.json();
-    if (data.status === 422) {
-      console.log("cannot register");
-      window.alert("Invalid Registration");
-    } else {
-      console.log("user registerd");
-      window.alert("Registeration Successful");
-      navigate("/login");
-    }
+    })
+      .then((res) => {
+        if (res.status === 422) {
+          console.log("cannot register");
+          window.alert("Invalid Registration");
+          navigate("/");
+        } else {
+          console.log("user registerd");
+          window.alert("Registeration Successful");
+          navigate("/login");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
