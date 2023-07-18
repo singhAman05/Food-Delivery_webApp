@@ -1,52 +1,52 @@
-//importing dependencies
-import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { useFormik } from "formik";
-import { Link, json, useNavigate } from "react-router-dom";
-import { login_validation } from "../validation/login_validation";
+import { signupSchema } from "../validation/signup_validation";
 
-//initials values to the feild
 const initialValues = {
+  name: "",
   email: "",
+  location: "",
   password: "",
 };
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
 
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
-    validationSchema: login_validation,
+    validationSchema: signupSchema,
     onSubmit: (values) => {
       console.log(values);
     },
   });
 
-  //posting data to backend for checking
+  //posting data to backend
   const postData = async (e) => {
     e.preventDefault();
 
-    const { email, password } = values;
+    const { name, email, location, password } = values;
 
-    await fetch("http://localhost:8000/login", {
+    const res = await fetch("http://localhost:8000/signup/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        name,
         email,
+        location,
         password,
       }),
     })
       .then((res) => {
-        if (res.status === 201) {
-          localStorage.setItem("user_email", email);
-          localStorage.setItem("token", JSON.stringify(res.json().auth));
-          console.log("user loggedin");
-          window.alert("login Successful");
+        if (res.status === 422) {
+          console.log("cannot register");
+          window.alert("Invalid Registration");
           navigate("/");
         } else {
-          console.log("cannot login");
-          window.alert("Invalid Credentials");
+          console.log("user registerd");
+          window.alert("Registeration Successful");
           navigate("/login");
         }
       })
@@ -59,6 +59,22 @@ const Login = () => {
     <>
       <div className="container">
         <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label for="name">Name</label>
+            <input
+              type="name"
+              name="name"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter Name"
+              autoComplete="off"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <p className="form-error">{errors.name}</p>
+          </div>
           <div className="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input
@@ -74,6 +90,25 @@ const Login = () => {
               onBlur={handleBlur}
             />
             <p className="form-error">{errors.email}</p>
+            <small id="emailHelp" className="form-text text-muted">
+              We'll never share your email with anyone else.
+            </small>
+          </div>
+          <div className="form-group">
+            <label for="name">location</label>
+            <input
+              type="name"
+              name="location"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter location"
+              autoComplete="off"
+              value={values.location}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <p className="form-error">{errors.location}</p>
           </div>
           <div className="form-group">
             <label for="exampleInputPassword1">Password</label>
@@ -91,10 +126,10 @@ const Login = () => {
             <p className="form-error">{errors.password}</p>
           </div>
           <button type="submit" className="btn btn-primary" onClick={postData}>
-            Login
+            Submit
           </button>
-          <Link to="/signup" className="m-3 btn btn-danger">
-            New User
+          <Link to="/login" className="m-3 btn btn-danger">
+            Already a User
           </Link>
         </form>
       </div>
@@ -102,4 +137,5 @@ const Login = () => {
   );
 };
 
-export default Login;
+//exporting moudles
+export default Signup;
