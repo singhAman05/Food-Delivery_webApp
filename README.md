@@ -1,4 +1,6 @@
-# MERN FOOD-DELIVERY WEBAPP TUTORIAL
+# MERN FOOD-DELIVERY WEBAPP -> "CRAVE EXPRESS"
+
+Crave Express is a web based platform offering takeout service that connects consumers with local restaurants.Thus,provides convenient way to order food at their door step.
 
 # Install Dependencies
 
@@ -11,6 +13,7 @@
 Split the VS code terminal and then do the following
 
 **For server** - `cd Backend`->`nodemon server.js` {make sure nodeon should be install}
+
 `cd Backend`->`npm server.js` {if nodemon is not install}
 
 **For UI** - `cd Frontend`->`cd src`->`npm start` {make sure react is installed}
