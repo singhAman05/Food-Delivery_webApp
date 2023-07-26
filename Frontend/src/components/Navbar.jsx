@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Badge from "react-bootstrap/Badge";
 import { useState } from "react";
-import Modal from "../Modal";
 import Cart from "../screens/Cart";
 import { Usecart } from "./ContextReducer";
 const React = require("react");
@@ -82,11 +81,6 @@ const Navbar = () => {
                     {data.length}
                   </Badge>
                 </Link>
-                {/* {cartView ? (
-                  <Modal onClose={() => setCartView(false)}>
-                    <Cart />
-                  </Modal>
-                ) : null} */}
                 <div
                   className="btn bg-white text-danger mx-2"
                   onClick={handleLogout}

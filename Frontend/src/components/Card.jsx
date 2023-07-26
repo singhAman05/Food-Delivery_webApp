@@ -1,4 +1,3 @@
-import image from "../Images/chad-montano-MqT0asuoIcU-unsplash.jpg";
 import { UseDispatch, Usecart } from "./ContextReducer";
 import { useState } from "react";
 const React = require("react");
