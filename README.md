@@ -20,7 +20,11 @@ Split the VS code terminal and then do the following
 All are the students of Motilal Nehru National Institute of Technology
 
 **Harsh Tiwary** **Git-hub** Click [hrs-2703](https://github.com/hrs-2703)
+
 **Snehal Tripathi** **Git-hub** Click [Snehal652](https://github.com/Snehal652)
+
 **Vani Tripathi** **Git-hub** Click [Vani1606](https://github.com/Vani1606)
+
 **Divyanshu Bissa** **Git-hub** Click [divyanshu318](https://github.com/divyanshu318)
+
 **Aman Shankar** **Git-hub** Click [singhAman05](https://github.com/singhAman05)
