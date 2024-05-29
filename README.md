@@ -12,7 +12,7 @@ Crave Express is a web based platform offering takeout service that connects con
 
 Split the VS code terminal and then do the following
 
-**For server** - `cd Backend`->`nodemon server.js` {make sure nodeon should be install}
+**For server** - `cd Backend`->`nodemon server.js` {make sure nodemon should be install}
 
 `cd Backend`->`npm server.js` {if nodemon is not install}
 
