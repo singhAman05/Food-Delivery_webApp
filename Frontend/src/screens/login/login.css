@@ -82,6 +82,12 @@ form.sign-in-form {
     padding: 0 0.4rem;
     position: relative;
   }
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
 
 
   .sign-up-form  .input-field i {

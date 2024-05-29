@@ -5,15 +5,6 @@ const Cart = () => {
   let cartData = Usecart();
   let dispatch = UseDispatch();
   // console.log(cartData.length);
-  if (cartData) {
-    if (cartData.length === 0) {
-      return (
-        <div>
-          <div className="m-5 w-100 text-center fs-3">The Cart is Empty!</div>
-        </div>
-      );
-    }
-  }
 
   const handleCheckOut = async () => {
     const user_email = localStorage.getItem("user_email");
@@ -33,6 +24,16 @@ const Cart = () => {
     }
   };
 
+  if (cartData) {
+    if (cartData.length === 0) {
+      return (
+        <div>
+          <div className="m-5 w-100 text-center fs-3">The Cart is Empty!</div>
+        </div>
+      );
+    }
+  }
+
   let totalPrice = cartData.reduce((total, food) => total + food.price, 0);
   return (
     <div>
@@ -40,7 +41,7 @@ const Cart = () => {
         <table className="table table-hover ">
           <thead className=" text-success fs-4">
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">S.no</th>
               <th scope="col">Name</th>
               <th scope="col">Quantity</th>
               <th scope="col">Option</th>
