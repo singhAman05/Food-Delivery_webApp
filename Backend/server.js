@@ -1,15 +1,13 @@
-//requiring dependencies
 const express = require("express");
-let app = express();
+require("dotenv").config();
+const app = express();
+const cors = require("cors");
 const bodyparse = require("body-parser");
-
-//requiring port
-const port = process.env.port || 8000;
-
-//adding database connection
-require("./database/conn");
+const port = process.env.SERVER_PORT || 5000;
+require("./database/connection/conn");
 
 //to access react api in our system of backend
+app.use(cors());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
@@ -25,20 +23,17 @@ app.use(bodyparse.json());
 app.use(bodyparse.urlencoded({ extended: true }));
 
 //path for registering users
-app.use("/signup", require("./routes/createUser"));
-app.use("/api", require("./routes/display_items"));
-app.use("/", require("./routes/loginUser"));
-app.use("/", require("./routes/user_order"));
+const newUser = require("./routes/newuser");
+const user = require("./routes/loginUser");
+const foodItems = require("./routes/foodData");
+app.use("/api/v1", newUser);
+app.use("/api/v1", user);
+app.use("/api/v1", foodItems);
 
 //accessing local backend index server
 app.get("/", (req, res) => {
-  res.send("Hello");
+  res.send("Hello from server");
 });
-
-// //testing post path
-// app.post("/food", (req, res) => {
-//   console.log(req.body);
-// });
 
 //listening to port
 app.listen(port, () => {

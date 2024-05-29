@@ -1,6 +1,7 @@
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const User = require("../database/models/user");
+const generateJWT = require("../utils/jwtGenerator");
 
 // Validation and sanitization middleware
 const validateInput = [
@@ -61,8 +62,10 @@ const registerUser = async (req, res) => {
     // Save the user to the database
     await newUser.save();
 
+    // generating token
+    const token = generateJWT(newUser._id);
     // Return success response
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({ message: "User registered successfully", token });
   } catch (error) {
     // Handle errors
     console.error("Error registering user:", error);
