@@ -61,19 +61,19 @@ const Cart = () => {
                     <div className="flex space-x-2">
                       <button
                         onClick={() => dispatch(increaseQuantity(item.id))}
-                        className="px-2 py-1 bg-green-500 text-white rounded"
+                        className="px-2 py-1 bg-gunmetal text-white rounded"
                       >
                         +
                       </button>
                       <button
                         onClick={() => dispatch(decreaseQuantity(item.id))}
-                        className="px-2 py-1 bg-yellow-500 text-white rounded"
+                        className="px-2 py-1 bg-harvest-gold text-white rounded"
                       >
                         -
                       </button>
                       <button
                         onClick={() => dispatch(removeItem(item.id))}
-                        className="px-2 py-1 bg-red-500 text-white rounded"
+                        className="px-2 py-1 bg-chilli-red text-white rounded"
                       >
                         Remove
                       </button>
