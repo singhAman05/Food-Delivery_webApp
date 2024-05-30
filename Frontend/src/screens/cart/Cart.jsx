@@ -1,11 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  addToCart,
   increaseQuantity,
   decreaseQuantity,
   removeItem,
 } from "../../redux/actions/cartActions";
+
+import { Remove, Add, Delete } from "../../utils/icons/Icons";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -38,7 +39,10 @@ const Cart = () => {
             </thead>
             <tbody>
               {cart.map((item, index) => (
-                <tr key={index} className="hover:bg-gray-100">
+                <tr
+                  key={index}
+                  className="hover:bg-gray-100 hover:shadow-lg transition duration-200 ease-in-out"
+                >
                   <td className="py-3 px-4 border-b border-gray-300">
                     {item.image && (
                       <img
@@ -61,21 +65,21 @@ const Cart = () => {
                     <div className="flex space-x-2">
                       <button
                         onClick={() => dispatch(increaseQuantity(item.id))}
-                        className="px-2 py-1 bg-gunmetal text-white rounded"
+                        className="px-2 py-1 text-gunmetal rounded"
                       >
-                        +
+                        <Add />
                       </button>
                       <button
                         onClick={() => dispatch(decreaseQuantity(item.id))}
-                        className="px-2 py-1 bg-harvest-gold text-white rounded"
+                        className="px-2 py-1 text-harvest-gold rounded"
                       >
-                        -
+                        <Remove />
                       </button>
                       <button
                         onClick={() => dispatch(removeItem(item.id))}
-                        className="px-2 py-1 bg-chilli-red text-white rounded"
+                        className="px-2 py-1 text-chilli-red rounded"
                       >
-                        Remove
+                        <Delete />
                       </button>
                     </div>
                   </td>
