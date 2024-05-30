@@ -16,7 +16,7 @@ function App() {
           <Route path="/" Component={Home} exact />
           <Route path="/login" Component={Login} />
           <Route path="/checkout" Component={CheckoutPage} />
-          {/* <Route path="/aboutUs" Component={AboutUsPage} /> */}
+          <Route path="/aboutUs" Component={AboutUsPage} />
           <Route path="/cart" Component={Cart} />
         </Routes>
       </Provider>
