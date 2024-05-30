@@ -1,6 +1,5 @@
 import React from "react";
-import { Facebook, YouTube, LinkedIn, Twitter } from "@mui/icons-material";
-// import Logo from "../../images/logo.svg";
+import { Youtube, Twitter, LinkedIn, Instagram } from "../../utils/icons/Icons";
 
 const Footer = () => {
   return (
@@ -19,17 +18,14 @@ const Footer = () => {
           <h3 className="py-2 text-[#cecece]">Email: example@gmail.com</h3>
 
           <div className="flex gap-4 py-4">
-            <div className="p-4 rounded-full bg-[#e9f8f3] cursor-pointer">
-              <Facebook size={25} />
+            <div className="p-4 rounded-full bg-ghost-white text-gunmetal hover:text-harvest-gold hover:bg-gunmetal cursor-pointer">
+              <Instagram size={25} />
             </div>
-            <div className="p-4 rounded-full bg-[#e9f8f3] cursor-pointer">
+            <div className="p-4 rounded-full bg-ghost-white text-gunmetal hover:text-harvest-gold hover:bg-gunmetal cursor-pointer">
               <Twitter size={25} />
             </div>
-            <div className="p-4 rounded-full bg-[#e9f8f3] cursor-pointer">
+            <div className="p-4 rounded-full bg-ghost-white text-gunmetal hover:text-harvest-gold hover:bg-gunmetal cursor-pointer">
               <LinkedIn size={25} />
-            </div>
-            <div className="p-4 rounded-full bg-[#e9f8f3] cursor-pointer">
-              <YouTube size={25} />
             </div>
           </div>
         </div>

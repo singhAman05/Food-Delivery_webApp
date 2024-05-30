@@ -12,12 +12,12 @@ import {
 import {
   Envelope,
   Lock,
-  Facebook,
   Instagram,
   Youtube,
   Twitter,
   User,
   Phone,
+  LinkedIn,
 } from "../../utils/icons/Icons";
 
 const Login = () => {
@@ -127,16 +127,24 @@ const Login = () => {
               </p>
               <div class="social-media">
                 <a href="#" class="social-icon">
-                  <i>{Instagram}</i>
+                  <i>
+                    <Instagram />
+                  </i>
                 </a>
                 <a href="#" class="social-icon">
-                  <i>{Twitter}</i>
+                  <i>
+                    <Twitter />
+                  </i>
                 </a>
                 <a href="#" class="social-icon">
-                  <i>{Youtube}</i>
+                  <i>
+                    <Youtube />
+                  </i>
                 </a>
                 <a href="#" class="social-icon">
-                  <i>{Facebook}</i>
+                  <i>
+                    <LinkedIn />
+                  </i>
                 </a>
               </div>
             </form>
@@ -199,16 +207,24 @@ const Login = () => {
               </p>
               <div class="social-media">
                 <a href="#" class="social-icon">
-                  <i>{Instagram}</i>
+                  <i>
+                    <Instagram />
+                  </i>
                 </a>
                 <a href="#" class="social-icon">
-                  <i>{Twitter}</i>
+                  <i>
+                    <Twitter />
+                  </i>
                 </a>
                 <a href="#" class="social-icon">
-                  <i>{Youtube}</i>
+                  <i>
+                    <Youtube />
+                  </i>
                 </a>
                 <a href="#" class="social-icon">
-                  <i>{Facebook}</i>
+                  <i>
+                    <LinkedIn />
+                  </i>
                 </a>
               </div>
             </form>
