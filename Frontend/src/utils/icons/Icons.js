@@ -9,25 +9,30 @@ import {
   faCartPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
-import {
-  faInstagram,
-  faYoutube,
-  faTwitter,
-  faFacebook,
-  faGithub,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import XIcon from "@mui/icons-material/X";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import GitHubIcon from "@mui/icons-material/GitHub";
+
+export const Remove = RemoveIcon;
+export const Add = AddIcon;
+export const Delete = DeleteSweepIcon;
+export const AddToCart = AddShoppingCartIcon;
+export const LinkedIn = LinkedInIcon;
+export const Twitter = XIcon;
+export const Youtube = YouTubeIcon;
+export const Instagram = InstagramIcon;
+export const Github = GitHubIcon;
 
 export const Previous = <FontAwesomeIcon icon={faLessThan} />;
 export const Next = <FontAwesomeIcon icon={faGreaterThan} />;
 export const Lock = <FontAwesomeIcon icon={faLock} />;
 export const Envelope = <FontAwesomeIcon icon={faEnvelope} />;
-export const Facebook = <FontAwesomeIcon icon={faFacebook} />;
-export const Twitter = <FontAwesomeIcon icon={faTwitter} />;
-export const Instagram = <FontAwesomeIcon icon={faInstagram} />;
-export const Youtube = <FontAwesomeIcon icon={faYoutube} />;
 export const User = <FontAwesomeIcon icon={faUser} />;
 export const Phone = <FontAwesomeIcon icon={faPhone} />;
 export const CartPlus = <FontAwesomeIcon icon={faCartPlus} />;
-export const LinkedIn = <FontAwesomeIcon icon={faLinkedin} />;
-export const Github = <FontAwesomeIcon icon={faGithub} />;
