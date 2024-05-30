@@ -1,23 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { CartPlus } from "../../utils/icons/Icons";
+import { useDispatch, useSelector } from "react-redux";
+import { AddToCart } from "../../utils/icons/Icons";
 import Loader from "../loader/Loader";
-import { addToCart } from "../../redux/actions/cartActions";
+import {
+  addToCart,
+  increaseQuantity,
+  decreaseQuantity,
+  removeItem,
+} from "../../redux/actions/cartActions";
 
 const Card = ({ food }) => {
   const navigate = useNavigate();
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
-  const handleCart = () => {
+  // Get the cart from the Redux store
+  const cart = useSelector((state) => state.cart.cart);
+  const cartItem = cart.find((item) => item.id === food._id);
+  const quantity = cartItem ? cartItem.quantity : 0;
+
+  const handleAddToCart = () => {
     setLoading(true);
-    console.log("item sent to redux");
-    const id = food._id;
-    const foodWithId = { ...food, id };
-    // console.log(food._id);
-    dispatch(addToCart(foodWithId)); // Pass the food item as payload
+    const foodWithId = { ...food, id: food._id };
+    dispatch(addToCart(foodWithId));
+    setLoading(false);
+  };
+
+  const handleIncrement = () => {
+    setLoading(true);
+    dispatch(increaseQuantity(food._id));
+    setLoading(false);
+  };
+
+  const handleDecrement = () => {
+    setLoading(true);
+    if (quantity === 1) {
+      dispatch(removeItem(food._id));
+    } else {
+      dispatch(decreaseQuantity(food._id));
+    }
     setLoading(false);
   };
 
@@ -35,13 +57,31 @@ const Card = ({ food }) => {
           <p className="text-gray-700 text-base">{food.description}</p>
         </div>
         <div className="px-6 pt-4 pb-2 flex justify-end">
-          <button
-            className="bg-harvest-gold hover:bg-chilli-red text-white font-bold py-2 px-4 rounded flex items-center"
-            onClick={handleCart}
-          >
-            {CartPlus}
-            <span className="ml-2">Add to Cart</span>
-          </button>
+          {quantity > 0 ? (
+            <div className="flex items-center bg-gunmetal rounded">
+              <button
+                className="bg-chilli-red hover:bg-dark-red text-white font-bold py-2 px-4 rounded-l"
+                onClick={handleDecrement}
+              >
+                -
+              </button>
+              <span className="mx-4 text-ghost-white">{quantity}</span>
+              <button
+                className="bg-harvest-gold text-white font-bold py-2 px-4 rounded-r"
+                onClick={handleIncrement}
+              >
+                +
+              </button>
+            </div>
+          ) : (
+            <button
+              className="bg-harvest-gold hover:bg-chilli-red text-white font-bold py-2 px-4 rounded flex items-center"
+              onClick={handleAddToCart}
+            >
+              <AddToCart />
+              <span className="ml-2">Add to Cart</span>
+            </button>
+          )}
         </div>
       </div>
     </>
