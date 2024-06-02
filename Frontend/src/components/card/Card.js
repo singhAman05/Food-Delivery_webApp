@@ -17,7 +17,9 @@ const Card = ({ food }) => {
 
   // Get the cart from the Redux store
   const cart = useSelector((state) => state.cart.cart);
+  // console.log(cart);
   const cartItem = cart.find((item) => item.id === food._id);
+  console.log(cartItem);
   const quantity = cartItem ? cartItem.quantity : 0;
 
   const handleAddToCart = () => {
@@ -35,7 +37,7 @@ const Card = ({ food }) => {
 
   const handleDecrement = () => {
     setLoading(true);
-    if (quantity === 1) {
+    if (cartItem.quantity === 1) {
       dispatch(removeItem(food._id));
     } else {
       dispatch(decreaseQuantity(food._id));
@@ -65,9 +67,9 @@ const Card = ({ food }) => {
               >
                 -
               </button>
-              <span className="mx-4 text-gunmetal semimbold">{quantity}</span>
+              <span className="mx-4 text-gunmetal">{cartItem.quantity}</span>
               <button
-                className="bg-harvest-gold text-ghost-white font-bold py-2 px-4 rounded-r"
+                className="bg-harvest-gold text-white font-bold py-2 px-4 rounded-r"
                 onClick={handleIncrement}
               >
                 +
@@ -75,7 +77,7 @@ const Card = ({ food }) => {
             </div>
           ) : (
             <button
-              className="bg-harvest-gold hover:bg-chilli-red text-ghost-white font-bold py-2 px-4 rounded flex items-center"
+              className="bg-harvest-gold hover:bg-chilli-red text-white font-bold py-2 px-4 rounded flex items-center"
               onClick={handleAddToCart}
             >
               <AddToCart />

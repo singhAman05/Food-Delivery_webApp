@@ -37,17 +37,21 @@ const cartReducer = (state = initialState, action) => {
         ),
       };
     case "DECREASE_QUANTITY":
+      const updatedCart = state.cart.map((item) =>
+        item.id === action.payload && item.quantity > 0
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      );
+      console.log("Updated Cart after decrement:", updatedCart);
+
+      const filteredCart = updatedCart.filter(
+        (item) => !(item.id === action.payload && item.quantity === 0)
+      );
+      console.log("Filtered Cart:", filteredCart);
+
       return {
         ...state,
-        cart: state.cart
-          .map((item) =>
-            item.id === action.payload && item.quantity > 1
-              ? { ...item, quantity: item.quantity - 1 }
-              : item
-          )
-          .filter(
-            (item) => !(item.id === action.payload && item.quantity === 1)
-          ),
+        cart: filteredCart,
       };
     case "REMOVE_ITEM":
       return {

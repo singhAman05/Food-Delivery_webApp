@@ -11,6 +11,10 @@ const CartItemCard = ({ item }) => {
   const [isSliding, setIsSliding] = useState(false);
   const dispatch = useDispatch();
 
+  const handleDecrement = () => {
+    dispatch(decreaseQuantity(item.id));
+  };
+
   const handleDeleteClick = () => {
     setIsSliding(true);
   };
@@ -44,7 +48,7 @@ const CartItemCard = ({ item }) => {
         </div>
       </div>
       <div
-        className={`flex items-center space-x-4 mt-4 md:mt-0 transition-transform duration-500 ${
+        className={`flex items-center space-x-4 mt-4 md:mt-0 transition-transform duration-200 ${
           isSliding ? "-translate-x-40" : ""
         }`}
       >
@@ -57,7 +61,7 @@ const CartItemCard = ({ item }) => {
             <Add />
           </button>
           <button
-            onClick={() => dispatch(decreaseQuantity(item.id))}
+            onClick={handleDecrement}
             className="px-2 py-1 text-harvest-gold rounded"
           >
             <Remove />
@@ -71,7 +75,7 @@ const CartItemCard = ({ item }) => {
         </div>
       </div>
       <div
-        className={`absolute right-0 top-0 bottom-0 flex items-center justify-center w-40 bg-red-500 text-white rounded-r-lg cursor-pointer transition-transform duration-500 ease-in-out ${
+        className={`absolute right-0 top-0 bottom-0 flex items-center justify-center w-40 bg-red-500 text-white rounded-r-lg cursor-pointer transition-transform duration-200 ease-in-out ${
           isSliding ? "translate-x-0" : "translate-x-full"
         }`}
       >

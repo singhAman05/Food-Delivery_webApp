@@ -29,6 +29,7 @@ const SetFoodItem = () => {
     fetchFoodItems();
   }, []);
 
+  // USE EFFECT ON LISTENING
   useEffect(() => {
     if ("webkitSpeechRecognition" in window) {
       const recognition = new window.webkitSpeechRecognition();
@@ -85,7 +86,7 @@ const SetFoodItem = () => {
 
   return (
     <div className="mx-auto px-1 py-5 mt-10 max-w-7xl">
-      <h1 className="text-2xl font-bold mb-6 text-center">Food Items</h1>
+      {/* <h1 className="text-2xl font-bold mb-6 text-center">Food Items</h1> */}
       <div className="mb-6 text-center">
         <input
           type="text"
