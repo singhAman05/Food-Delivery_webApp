@@ -13,7 +13,7 @@ const getFoodItems = async (req, res) => {
 const setFoodItems = async (req, res) => {
   try {
     // Get the array of food items from the request body
-    const foodItemsData = req.body;
+    const foodItemsData = req.body.foodItems; // Access the "foodItems" property
 
     // Check if the data is an array
     if (!Array.isArray(foodItemsData)) {
@@ -44,12 +44,10 @@ const setFoodItems = async (req, res) => {
       (item) => item !== null
     );
 
-    res
-      .status(201)
-      .json({
-        message: "Food items saved successfully",
-        savedFoodItems: filteredSavedFoodItems,
-      });
+    res.status(201).json({
+      message: "Food items saved successfully",
+      savedFoodItems: filteredSavedFoodItems,
+    });
   } catch (error) {
     console.error("Error saving food items:", error);
     res.status(500).json({ message: "Internal server error" });
