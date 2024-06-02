@@ -58,16 +58,16 @@ const Card = ({ food }) => {
         </div>
         <div className="px-6 pt-4 pb-2 flex justify-end">
           {quantity > 0 ? (
-            <div className="flex items-center bg-gunmetal rounded">
+            <div className="flex items-center bg-gray-100 rounded">
               <button
-                className="bg-chilli-red hover:bg-dark-red text-white font-bold py-2 px-4 rounded-l"
+                className="bg-chilli-red hover:bg-dark-red text-ghost-white font-bold py-2 px-4 rounded-l"
                 onClick={handleDecrement}
               >
                 -
               </button>
-              <span className="mx-4 text-ghost-white">{quantity}</span>
+              <span className="mx-4 text-gunmetal semimbold">{quantity}</span>
               <button
-                className="bg-harvest-gold text-white font-bold py-2 px-4 rounded-r"
+                className="bg-harvest-gold text-ghost-white font-bold py-2 px-4 rounded-r"
                 onClick={handleIncrement}
               >
                 +
@@ -75,7 +75,7 @@ const Card = ({ food }) => {
             </div>
           ) : (
             <button
-              className="bg-harvest-gold hover:bg-chilli-red text-white font-bold py-2 px-4 rounded flex items-center"
+              className="bg-harvest-gold hover:bg-chilli-red text-ghost-white font-bold py-2 px-4 rounded flex items-center"
               onClick={handleAddToCart}
             >
               <AddToCart />
