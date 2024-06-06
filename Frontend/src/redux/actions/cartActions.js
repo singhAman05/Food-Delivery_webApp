@@ -1,29 +1,36 @@
-export const addToCart = (item) => {
-  // console.log("item received at redux actions");
-  // console.log(item);
+// src/redux/actions/cartActions.js
+
+export const addToCart = (food) => {
   return {
     type: "ADD_TO_CART",
-    payload: item,
+    payload: {
+      id: food.id,
+      name: food.name,
+      image: food.image,
+      selectedOption: food.selectedOption,
+      selectedPrice: food.selectedPrice,
+      quantity: 1,
+    },
   };
 };
 
-export const increaseQuantity = (itemId) => {
+export const increaseQuantity = (id, selectedOption) => {
   return {
     type: "INCREASE_QUANTITY",
-    payload: itemId,
+    payload: { id, selectedOption },
   };
 };
 
-export const decreaseQuantity = (itemId) => {
+export const decreaseQuantity = (id, selectedOption) => {
   return {
     type: "DECREASE_QUANTITY",
-    payload: itemId,
+    payload: { id, selectedOption },
   };
 };
 
-export const removeItem = (itemId) => {
+export const removeItem = (id, selectedOption) => {
   return {
     type: "REMOVE_ITEM",
-    payload: itemId,
+    payload: { id, selectedOption },
   };
 };

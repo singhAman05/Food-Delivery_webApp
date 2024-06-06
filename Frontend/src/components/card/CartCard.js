@@ -8,15 +8,22 @@ import {
 import { Remove, Add, Delete, Close } from "../../utils/icons/Icons";
 
 const CartItemCard = ({ item }) => {
+  console.log(item);
   const [isSliding, setIsSliding] = useState(false);
   const dispatch = useDispatch();
+
+  const handleDecrement = () => {
+    if (item.quantity === 1) {
+      dispatch(removeItem(item.id, item.selectedOption));
+    } else dispatch(decreaseQuantity(item.id, item.selectedOption));
+  };
 
   const handleDeleteClick = () => {
     setIsSliding(true);
   };
 
   const handleRemoveClick = () => {
-    dispatch(removeItem(item.id));
+    dispatch(removeItem(item.id, item.selectedOption));
     setIsSliding(false);
   };
 
@@ -38,26 +45,32 @@ const CartItemCard = ({ item }) => {
             className="w-20 h-20 object-cover rounded-md"
           />
         )}
-        <div>
-          <h2 className="text-lg font-bold">{item.name}</h2>
-          <p className="text-gray-600">{item.description}</p>
+        <div className="flex flex-col md:flex-row">
+          <span className="text-lg font-bold mx-2">{item.name}</span>
+          <span className="text-gunmetal mx-2">{item.selectedOption} </span>
+          <span className="text-gunmetal mx-2">
+            <span className="text-gunmetal">&#8377; </span>
+            {item.selectedPrice ? item.selectedPrice.toFixed(2) : "0.00"}
+          </span>
         </div>
       </div>
       <div
-        className={`flex items-center space-x-4 mt-4 md:mt-0 transition-transform duration-500 ${
+        className={`flex items-center space-x-4 mt-4 md:mt-0 transition-transform duration-200 ${
           isSliding ? "-translate-x-40" : ""
         }`}
       >
         <span className="text-center font-bold">{item.quantity}</span>
         <div className="flex space-x-2">
           <button
-            onClick={() => dispatch(increaseQuantity(item.id))}
+            onClick={() =>
+              dispatch(increaseQuantity(item.id, item.selectedOption))
+            }
             className="px-2 py-1 text-gunmetal rounded"
           >
             <Add />
           </button>
           <button
-            onClick={() => dispatch(decreaseQuantity(item.id))}
+            onClick={handleDecrement}
             className="px-2 py-1 text-harvest-gold rounded"
           >
             <Remove />
@@ -69,9 +82,17 @@ const CartItemCard = ({ item }) => {
             <Delete />
           </button>
         </div>
+        <div className="flex items-center justify-between w-full md:mt-0">
+          <span className="text-gunmetal font-bold">
+            Total: <span className="text-chilli-red"> &#8377; </span>
+            {item.selectedPrice
+              ? (item.selectedPrice * item.quantity).toFixed(2)
+              : "0.00"}
+          </span>
+        </div>
       </div>
       <div
-        className={`absolute right-0 top-0 bottom-0 flex items-center justify-center w-40 bg-red-500 text-white rounded-r-lg cursor-pointer transition-transform duration-500 ease-in-out ${
+        className={`absolute right-0 top-0 bottom-0 flex items-center justify-center w-40 bg-red-500 text-white rounded-r-lg cursor-pointer transition-transform duration-200 ease-in-out ${
           isSliding ? "translate-x-0" : "translate-x-full"
         }`}
       >

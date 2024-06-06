@@ -4,7 +4,7 @@ const foodItemSchema = new mongoose.Schema({
   category: String,
   name: String,
   image: String,
-  options: [String], // Assuming options is an array of strings
+  options: [Object], // Assuming options is an array of strings
   description: String,
 });
 
