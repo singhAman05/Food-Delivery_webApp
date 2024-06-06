@@ -21,6 +21,10 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
+import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 
 export const Remove = RemoveIcon;
 export const Add = AddIcon;
@@ -34,6 +38,10 @@ export const Github = GitHubIcon;
 export const Close = CloseIcon;
 export const Mic = KeyboardVoiceIcon;
 export const Listen = GraphicEqIcon;
+export const Up = KeyboardDoubleArrowUpIcon;
+export const Down = KeyboardDoubleArrowDownIcon;
+export const Rupee = CurrencyRupeeIcon;
+export const Checkout = ShoppingCartCheckoutIcon;
 
 export const Previous = <FontAwesomeIcon icon={faLessThan} />;
 export const Next = <FontAwesomeIcon icon={faGreaterThan} />;
