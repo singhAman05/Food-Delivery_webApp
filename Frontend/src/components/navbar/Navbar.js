@@ -1,13 +1,16 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-// import { logoutSuccess } from "../../redux/actions/authActions";
 import Loader from "../loader/Loader";
-// import "./navbar.css";
+import { useSelector } from "react-redux";
 
 const Navbar = ({ isLoggedIn, logout }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
+
+  // Get the cart items from Redux store
+  const cartItems = useSelector((state) => state.cart.cart);
+  // Calculate the number of different items in the cart
+  const numberOfDifferentItems = new Set(cartItems.map((item) => item.id)).size;
 
   const handleLogout = () => {
     setLoading(true);
@@ -33,11 +36,19 @@ const Navbar = ({ isLoggedIn, logout }) => {
           </ul>
           {isLoggedIn ? (
             <>
-              <ul className="flex space-x-6">
-                <li className="mx-3 text-ghost-white hover:text-harvest-gold cursor-pointer">
-                  My Cart
+              <ul className="flex space-x-6 relative">
+                <li className="mx-3">
+                  <span className="text-ghost-white hover:text-harvest-gold cursor-pointer relative">
+                    My Cart
+                    {numberOfDifferentItems > 0 && (
+                      <span className="absolute top-0 right-0 -mt-2 bg-harvest-gold text-white rounded-full px-2 py-1 text-xs">
+                        {numberOfDifferentItems}
+                      </span>
+                    )}
+                  </span>
                 </li>
               </ul>
+
               <ul className="flex space-x-6">
                 <li className="mx-3 text-ghost-white hover:text-harvest-gold cursor-pointer">
                   My Orders
@@ -53,14 +64,21 @@ const Navbar = ({ isLoggedIn, logout }) => {
           ) : (
             <>
               <ul className="flex space-x-6">
-                <li className="mx-3 text-ghost-white hover:text-harvest-gold cursor-pointerr">
+                <li className="mx-3 text-ghost-white hover:text-harvest-gold cursor-pointer">
                   Menu
                 </li>
               </ul>
               <Link to="/cart">
                 <ul className="flex space-x-6">
-                  <li className="mx-3 text-ghost-white hover:text-harvest-gold cursor-pointer">
-                    Cart
+                  <li className="mx-3 relative">
+                    <span className="text-ghost-white hover:text-harvest-gold cursor-pointer">
+                      Cart
+                    </span>
+                    {numberOfDifferentItems > 0 && (
+                      <span className="absolute top-0 right-0 bg-harvest-gold text-white rounded-full px-2 py-1 text-xs">
+                        {numberOfDifferentItems}
+                      </span>
+                    )}
                   </li>
                 </ul>
               </Link>

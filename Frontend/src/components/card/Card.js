@@ -9,40 +9,49 @@ import {
   decreaseQuantity,
   removeItem,
 } from "../../redux/actions/cartActions";
+import OptionsMenu from "../options/Options";
 
 const Card = ({ food }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
-  // Get the cart from the Redux store
+  // Initialize selected option and price based on the first option
+  const [selectedOption, setSelectedOption] = useState(food.options[0].name);
+  const [selectedPrice, setSelectedPrice] = useState(food.options[0].price);
+
   const cart = useSelector((state) => state.cart.cart);
-  // console.log(cart);
-  const cartItem = cart.find((item) => item.id === food._id);
-  console.log(cartItem);
+  const cartItem = cart.find(
+    (item) => item.id === food._id && item.selectedOption === selectedOption
+  );
   const quantity = cartItem ? cartItem.quantity : 0;
 
   const handleAddToCart = () => {
     setLoading(true);
-    const foodWithId = { ...food, id: food._id };
+    const foodWithId = { ...food, id: food._id, selectedOption, selectedPrice };
     dispatch(addToCart(foodWithId));
     setLoading(false);
   };
 
   const handleIncrement = () => {
     setLoading(true);
-    dispatch(increaseQuantity(food._id));
+    dispatch(increaseQuantity(food._id, selectedOption));
     setLoading(false);
   };
 
   const handleDecrement = () => {
     setLoading(true);
     if (cartItem.quantity === 1) {
-      dispatch(removeItem(food._id));
+      dispatch(removeItem(food._id, selectedOption));
     } else {
-      dispatch(decreaseQuantity(food._id));
+      dispatch(decreaseQuantity(food._id, selectedOption));
     }
     setLoading(false);
+  };
+
+  const handleSelectOption = (option, price) => {
+    setSelectedOption(option);
+    setSelectedPrice(price);
   };
 
   return (
@@ -57,8 +66,18 @@ const Card = ({ food }) => {
         <div className="px-6 py-4">
           <h2 className="font-bold text-xl mb-2">{food.name}</h2>
           <p className="text-gray-700 text-base">{food.description}</p>
+          <br />
+          <OptionsMenu
+            options={food.options}
+            selectedOption={selectedOption}
+            onSelectOption={handleSelectOption}
+          />
         </div>
-        <div className="px-6 pt-4 pb-2 flex justify-end">
+        <div className="px-6 pt-4 pb-2 flex justify-between items-center">
+          <span className="text-xl font-bold text-gunmetal">
+            <span className="text-chilli-red">&#8377; </span>
+            {selectedPrice ? selectedPrice.toFixed(2) : ""}
+          </span>
           {quantity > 0 ? (
             <div className="flex items-center bg-gray-100 rounded">
               <button

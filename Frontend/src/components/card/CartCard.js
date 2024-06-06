@@ -8,11 +8,14 @@ import {
 import { Remove, Add, Delete, Close } from "../../utils/icons/Icons";
 
 const CartItemCard = ({ item }) => {
+  console.log(item);
   const [isSliding, setIsSliding] = useState(false);
   const dispatch = useDispatch();
 
   const handleDecrement = () => {
-    dispatch(decreaseQuantity(item.id));
+    if (item.quantity === 1) {
+      dispatch(removeItem(item.id, item.selectedOption));
+    } else dispatch(decreaseQuantity(item.id, item.selectedOption));
   };
 
   const handleDeleteClick = () => {
@@ -20,7 +23,7 @@ const CartItemCard = ({ item }) => {
   };
 
   const handleRemoveClick = () => {
-    dispatch(removeItem(item.id));
+    dispatch(removeItem(item.id, item.selectedOption));
     setIsSliding(false);
   };
 
@@ -42,9 +45,13 @@ const CartItemCard = ({ item }) => {
             className="w-20 h-20 object-cover rounded-md"
           />
         )}
-        <div>
-          <h2 className="text-lg font-bold">{item.name}</h2>
-          <p className="text-gray-600">{item.description}</p>
+        <div className="flex flex-col md:flex-row">
+          <span className="text-lg font-bold mx-2">{item.name}</span>
+          <span className="text-gunmetal mx-2">{item.selectedOption} </span>
+          <span className="text-gunmetal mx-2">
+            <span className="text-gunmetal">&#8377; </span>
+            {item.selectedPrice ? item.selectedPrice.toFixed(2) : "0.00"}
+          </span>
         </div>
       </div>
       <div
@@ -55,7 +62,9 @@ const CartItemCard = ({ item }) => {
         <span className="text-center font-bold">{item.quantity}</span>
         <div className="flex space-x-2">
           <button
-            onClick={() => dispatch(increaseQuantity(item.id))}
+            onClick={() =>
+              dispatch(increaseQuantity(item.id, item.selectedOption))
+            }
             className="px-2 py-1 text-gunmetal rounded"
           >
             <Add />
@@ -72,6 +81,14 @@ const CartItemCard = ({ item }) => {
           >
             <Delete />
           </button>
+        </div>
+        <div className="flex items-center justify-between w-full md:mt-0">
+          <span className="text-gunmetal font-bold">
+            Total: <span className="text-chilli-red"> &#8377; </span>
+            {item.selectedPrice
+              ? (item.selectedPrice * item.quantity).toFixed(2)
+              : "0.00"}
+          </span>
         </div>
       </div>
       <div
