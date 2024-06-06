@@ -23,12 +23,14 @@ app.use(bodyparse.json());
 app.use(bodyparse.urlencoded({ extended: true }));
 
 //path for registering users
-const newUser = require("./routes/newuser");
-const user = require("./routes/loginUser");
-const foodItems = require("./routes/foodData");
+const newUser = require("./routes/newUserRoute");
+const user = require("./routes/loginUserRoute");
+const foodItems = require("./routes/foodDataRoute");
+const paymentOptions = require("./routes/paymentOptionsRoute");
 app.use("/api/v1", newUser);
 app.use("/api/v1", user);
 app.use("/api/v1", foodItems);
+app.use("/api/v1", paymentOptions);
 
 //accessing local backend index server
 app.get("/", (req, res) => {
