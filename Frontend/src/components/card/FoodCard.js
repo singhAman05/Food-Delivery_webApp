@@ -9,7 +9,7 @@ import {
   decreaseQuantity,
   removeItem,
 } from "../../redux/actions/cartActions";
-import OptionsMenu from "../options/Options";
+import OptionsMenu from "../options/FoodOptions";
 
 const Card = ({ food }) => {
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ const Card = ({ food }) => {
         />
         <div className="px-6 py-4">
           <h2 className="font-bold text-xl mb-2">{food.name}</h2>
-          <p className="text-gray-700 text-base">{food.description}</p>
+          <p className="text-gunmetal text-base">{food.description}</p>
           <br />
           <OptionsMenu
             options={food.options}
