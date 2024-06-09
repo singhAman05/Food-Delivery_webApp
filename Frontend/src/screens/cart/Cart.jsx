@@ -47,6 +47,51 @@ const Cart = () => {
   // Calculate Grand Total including taxes
   const grandTotal = subtotal + cgstAmount + sgstAmount;
 
+  const handleOrderNow = async () => {
+    // Map cart items to match backend structure
+    const formattedItems = cart.map((item) => ({
+      id: parseInt(item.id), // Convert id to a number using parseInt
+      name: item.name,
+      selectedPrice: item.selectedPrice,
+      quantity: item.quantity,
+    }));
+
+    // Create order details object with required fields
+    const orderDetails = {
+      items: formattedItems,
+      paymentOption: selectedOption, // Assuming selectedOption is a string like "Credit Card"
+      subtotal: subtotal, // Subtotal amount
+      cgst: cgstAmount, // CGST amount
+      sgst: sgstAmount, // SGST amount
+      grandTotal: grandTotal, // Grand total amount
+    };
+
+    console.log("Order Details:", orderDetails); // For debugging
+
+    try {
+      const token = localStorage.getItem("jwtToken"); // Retrieve JWT token
+
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/setOrderDetails",
+        orderDetails,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include JWT token in headers
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Order response:", response.data);
+
+      // Redirect to a success page or show a success message
+      // history.push("/order-success"); // Example route, change as needed
+    } catch (error) {
+      console.error("Error submitting order:", error);
+      // Handle error appropriately (e.g., show an error message)
+    }
+  };
+
   return (
     <div className="mx-auto px-1 py-5 mt-10 max-w-4xl">
       <h1 className="text-2xl font-bold mb-6 text-center">Shopping Cart</h1>
@@ -58,7 +103,7 @@ const Cart = () => {
             ))}
           </div>
           <div className="relative mt-6">
-            <div className="flex flex-row justify-between items-center bg-white shadow-md rounded-lg p-4">
+            <div className="flex flex-row justify-between items-center bg-white shadow-md rounded-lg p-4 min-w-fit">
               <div>
                 <span className="text-lg font-bold text-gunmetal">
                   Subtotal: <span className="text-chilli-red">&#8377; </span>
@@ -93,7 +138,10 @@ const Cart = () => {
                   onSelectOption={handleSelectOption}
                 />
               </div>
-              <button className="relative mt-16 mr-4 bg-chilli-red hover:bg-harvest-gold text-white font-bold py-2 px-4 rounded">
+              <button
+                className="relative mt-16 mr-4 bg-chilli-red hover:bg-harvest-gold text-white font-bold py-2 px-4 rounded"
+                onClick={handleOrderNow}
+              >
                 <Checkout /> <span>Order Now</span>
               </button>
             </div>

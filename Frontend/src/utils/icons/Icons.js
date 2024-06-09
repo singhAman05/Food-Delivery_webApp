@@ -25,6 +25,9 @@ import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import MoneyIcon from "@mui/icons-material/Money";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import PaymentsIcon from "@mui/icons-material/Payments";
 
 export const Remove = RemoveIcon;
 export const Add = AddIcon;
@@ -42,6 +45,9 @@ export const Up = KeyboardDoubleArrowUpIcon;
 export const Down = KeyboardDoubleArrowDownIcon;
 export const Rupee = CurrencyRupeeIcon;
 export const Checkout = ShoppingCartCheckoutIcon;
+export const Cash = MoneyIcon;
+export const Card = CreditCardIcon;
+export const Payments = PaymentsIcon;
 
 export const Previous = <FontAwesomeIcon icon={faLessThan} />;
 export const Next = <FontAwesomeIcon icon={faGreaterThan} />;
