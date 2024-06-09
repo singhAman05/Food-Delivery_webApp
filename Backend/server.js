@@ -27,10 +27,13 @@ const newUser = require("./routes/newUserRoute");
 const user = require("./routes/loginUserRoute");
 const foodItems = require("./routes/foodDataRoute");
 const paymentOptions = require("./routes/paymentOptionsRoute");
+const orderDetails = require("./routes/orderRoute");
+
 app.use("/api/v1", newUser);
 app.use("/api/v1", user);
 app.use("/api/v1", foodItems);
 app.use("/api/v1", paymentOptions);
+app.use("/api/v1", orderDetails);
 
 //accessing local backend index server
 app.get("/", (req, res) => {

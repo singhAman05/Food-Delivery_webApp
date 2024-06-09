@@ -4,7 +4,6 @@ const {
   getPaymentOptions,
   setPaymentOptions,
 } = require("../controllers/paymentOptionController");
-
 //route for geting food Items
 router.get("/getPaymentOptions", getPaymentOptions);
 router.post("/setPaymentOptions", setPaymentOptions);
