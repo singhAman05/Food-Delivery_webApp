@@ -72,7 +72,7 @@ const Cart = () => {
       const token = localStorage.getItem("jwtToken"); // Retrieve JWT token
 
       const response = await axios.post(
-        "http://localhost:5000/api/v1/setOrderDetails",
+        `http://localhost:5000/api/v1/${selectedOption}/payment`,
         orderDetails,
         {
           headers: {
@@ -82,8 +82,9 @@ const Cart = () => {
         }
       );
 
-      console.log("Order response:", response.data);
-
+      const approvalUrl = response.data.approvalUrl;
+      console.log(approvalUrl);
+      window.location.href = approvalUrl;
       // Redirect to a success page or show a success message
       // history.push("/order-success"); // Example route, change as needed
     } catch (error) {
