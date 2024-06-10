@@ -1,35 +1,23 @@
 const Order = require("../database/models/order");
 
-// POST /api/v1/submitOrder
-const submitOrder = async (req, res) => {
-  // Validate request body
-
-  const { items, paymentOption, subtotal, cgst, sgst, grandTotal } = req.body;
-
+const getUserOrders = async (req, res) => {
   try {
-    // Create a new order with the user info
-    const newOrder = new Order({
-      user: req.user.id, // Attach user ID from req.user
-      items,
-      paymentOption,
-      subtotal,
-      cgst,
-      sgst,
-      grandTotal,
-    });
+    const userId = req.user.id; // Assuming req.user contains user information after authentication
+    const orders = await Order.find({ user: userId });
 
-    // Save order to database
-    const savedOrder = await newOrder.save();
-    // Respond with the saved order details
-    res
-      .status(201)
-      .json({ message: "Order submitted successfully", order: savedOrder });
+    if (!orders) {
+      return res
+        .status(404)
+        .json({ message: "No orders found for this user." });
+    }
+
+    res.status(200).json(orders);
   } catch (error) {
-    console.error("Error submitting order:", error);
-    res.status(500).json({ message: "Error submitting order", error });
+    console.error("Error fetching orders:", error);
+    res.status(500).json({ message: "Error fetching orders", error });
   }
 };
 
 module.exports = {
-  submitOrder,
+  getUserOrders,
 };
