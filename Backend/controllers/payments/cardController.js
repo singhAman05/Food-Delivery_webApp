@@ -11,7 +11,7 @@ const submitOrder = async (req, res) => {
 
       const lineItems = items.map((item) => ({
         price_data: {
-          currency: "inr", // Replace with your currency
+          currency: "usd", // Replace with your currency
           product_data: {
             name: item.name,
             description: `Price: ${item.selectedPrice}`,
