@@ -8,7 +8,7 @@ import {
   SIGNUP_SUCCESS,
 } from "../constants/constants";
 
-import { handleErrors, handleSuccess } from "../../utils/notifications/notify";
+import { handleSuccess } from "../../utils/notifications/notify";
 
 // API URL
 const API_URL = "http://localhost:5000/api/v1";
