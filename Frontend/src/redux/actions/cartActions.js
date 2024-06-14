@@ -1,36 +1,78 @@
-// src/redux/actions/cartActions.js
+// Action Types
+import {
+  ADD_TO_CART,
+  INCREASE_QUANTITY,
+  DECREASE_QUANTITY,
+  REMOVE_ITEM,
+  LOAD_CART,
+  CLEAR_CART,
+} from "../constants/constants";
 
-export const addToCart = (food) => {
-  return {
-    type: "ADD_TO_CART",
+// Load the cart from localStorage
+export const loadCart = (userId) => {
+  const savedCart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || [];
+  return { type: LOAD_CART, payload: { cart: savedCart, userId } };
+};
+
+// Add an item to the cart and save to localStorage
+export const addToCart = (food) => (dispatch, getState) => {
+  // console.log("Received food in addToCart action:", food);
+  const { id, name, image, selectedOption, selectedPrice, userId } = food;
+
+  dispatch({
+    type: ADD_TO_CART,
     payload: {
-      id: food.id,
-      name: food.name,
-      image: food.image,
-      selectedOption: food.selectedOption,
-      selectedPrice: food.selectedPrice,
-      quantity: 1,
+      item: {
+        id,
+        name,
+        image,
+        selectedOption,
+        selectedPrice,
+        quantity: 1,
+      },
+      userId,
     },
-  };
+  });
 };
 
-export const increaseQuantity = (id, selectedOption) => {
-  return {
-    type: "INCREASE_QUANTITY",
-    payload: { id, selectedOption },
-  };
-};
+// Increase quantity and save to localStorage
+export const increaseQuantity =
+  (id, selectedOption, userId) => (dispatch, getState) => {
+    dispatch({
+      type: INCREASE_QUANTITY,
+      payload: { id, selectedOption, userId },
+    });
 
-export const decreaseQuantity = (id, selectedOption) => {
-  return {
-    type: "DECREASE_QUANTITY",
-    payload: { id, selectedOption },
+    const updatedCart = getState().cart.cart;
+    localStorage.setItem(`cart_${userId}`, JSON.stringify(updatedCart));
   };
-};
 
-export const removeItem = (id, selectedOption) => {
-  return {
-    type: "REMOVE_ITEM",
-    payload: { id, selectedOption },
+// Decrease quantity and save to localStorage
+export const decreaseQuantity =
+  (id, selectedOption, userId) => (dispatch, getState) => {
+    dispatch({
+      type: DECREASE_QUANTITY,
+      payload: { id, selectedOption, userId },
+    });
+
+    const updatedCart = getState().cart.cart;
+    localStorage.setItem(`cart_${userId}`, JSON.stringify(updatedCart));
   };
+
+// Remove item and save to localStorage
+export const removeItem =
+  (id, selectedOption, userId) => (dispatch, getState) => {
+    dispatch({
+      type: REMOVE_ITEM,
+      payload: { id, selectedOption, userId },
+    });
+
+    const updatedCart = getState().cart.cart;
+    localStorage.setItem(`cart_${userId}`, JSON.stringify(updatedCart));
+  };
+
+// Clear the cart and remove from localStorage
+export const clearCart = (userId) => (dispatch) => {
+  localStorage.removeItem(`cart_${userId}`);
+  dispatch({ type: CLEAR_CART, payload: { userId } });
 };

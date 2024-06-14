@@ -1,2 +1,11 @@
-export const LOGIN_SUCCESS = "auth/loginSuccess";
-export const LOGOUT_SUCCESS = "auth/logoutSuccess";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
+export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+export const SIGNUP_FAILURE = "SIGNUP_FAILURE";
+export const LOGOUT = "LOGOUT";
+export const LOAD_CART = "LOAD_CART";
+export const CLEAR_CART = "CLEAR_CART";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const INCREASE_QUANTITY = "INCREASE_QUANTITY";
+export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
+export const REMOVE_ITEM = "REMOVE_ITEM";

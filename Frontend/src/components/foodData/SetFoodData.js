@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Mic, Listen } from "../../utils/icons/Icons";
 import axios from "axios";
-import Card from "../card/Card";
+import Card from "../card/FoodCard";
 
 const SetFoodItem = () => {
   const [foodItems, setFoodItems] = useState([]);
