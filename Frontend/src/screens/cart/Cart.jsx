@@ -1,15 +1,34 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import CartCard from "../../components/card/CartCard"; // Import the new Card component
+import { useSelector, useDispatch } from "react-redux";
+import CartCard from "../../components/card/CartCard";
 import { Checkout } from "../../utils/icons/Icons";
 import PaymentOptions from "../../components/options/PaymentOptions";
+import { loadCart } from "../../redux/actions/cartActions"; // Import loadCart action
 
 const Cart = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
+  const { token, user } = useSelector((state) => state.auth);
   const [paymentOptions, setPaymentOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
+
+  useEffect(() => {
+    // Check if user is not authenticated, then redirect
+    if (!token) {
+      navigate("/login", { replace: true });
+    }
+  }, [token, navigate]);
+
+  // Load the cart from localStorage
+  useEffect(() => {
+    console.log(user.id);
+    if (user) {
+      dispatch(loadCart(user.id));
+    }
+  }, [user, dispatch]);
 
   // Fetch payment options data from API
   useEffect(() => {
@@ -18,7 +37,7 @@ const Cart = () => {
         const res = await axios.get(
           "http://localhost:5000/api/v1/getPaymentOptions"
         );
-        setPaymentOptions(res.data.paymentOptions || []); // Assuming API returns { paymentOptions: [...] }
+        setPaymentOptions(res.data.paymentOptions || []);
       } catch (error) {
         console.error("Error fetching payment options:", error);
       }
@@ -50,7 +69,7 @@ const Cart = () => {
   const handleOrderNow = async () => {
     // Map cart items to match backend structure
     const formattedItems = cart.map((item) => ({
-      id: parseInt(item.id), // Convert id to a number using parseInt
+      id: parseInt(item.id),
       name: item.name,
       selectedPrice: item.selectedPrice,
       quantity: item.quantity,
@@ -59,37 +78,33 @@ const Cart = () => {
     // Create order details object with required fields
     const orderDetails = {
       items: formattedItems,
-      paymentOption: selectedOption, // Assuming selectedOption is a string like "Credit Card"
-      subtotal: subtotal, // Subtotal amount
-      cgst: cgstAmount, // CGST amount
-      sgst: sgstAmount, // SGST amount
-      grandTotal: grandTotal, // Grand total amount
+      paymentOption: selectedOption,
+      subtotal: subtotal,
+      cgst: cgstAmount,
+      sgst: sgstAmount,
+      grandTotal: grandTotal,
     };
 
-    console.log("Order Details:", orderDetails); // For debugging
+    console.log("Order Details:", orderDetails);
 
     try {
-      const token = localStorage.getItem("jwtToken"); // Retrieve JWT token
+      const token = localStorage.getItem("jwtToken");
 
       const response = await axios.post(
         `http://localhost:5000/api/v1/${selectedOption}/payment`,
         orderDetails,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Include JWT token in headers
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
       );
 
       const approvalUrl = response.data.approvalUrl;
-      console.log(approvalUrl);
       window.location.href = approvalUrl;
-      // Redirect to a success page or show a success message
-      // history.push("/order-success"); // Example route, change as needed
     } catch (error) {
       console.error("Error submitting order:", error);
-      // Handle error appropriately (e.g., show an error message)
     }
   };
 

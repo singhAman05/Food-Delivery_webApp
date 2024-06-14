@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  background: #f1f1f1;
+}
+
 .slick-slide > div{
     margin: 0 10px;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  

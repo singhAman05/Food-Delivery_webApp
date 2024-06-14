@@ -1,27 +1,30 @@
+import React from "react";
 import Home from "./screens/home/Home.jsx";
 import Login from "./screens/login/Login.jsx";
-import CheckoutPage from "./screens/checkout/CheckOut.jsx";
 import AboutUsPage from "./screens/aboutUs/AboutUs.jsx";
 import Cart from "./screens/cart/Cart.jsx";
 import MyOrders from "./screens/orders/MyOrders.jsx";
 import { Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import store from "./redux/store.js";
-const React = require("react");
+
+const clientId =
+  "19247234044-qvuagd11f0kslaftdjehlmpdngr5clm6.apps.googleusercontent.com";
 
 function App() {
   return (
-    <>
-      <Provider store={store}>
+    <Provider store={store}>
+      <GoogleOAuthProvider clientId={clientId}>
         <Routes>
-          <Route path="/" Component={MyOrders} exact />
-          <Route path="/login" Component={Login} />
-          <Route path="/checkout" Component={CheckoutPage} />
-          <Route path="/aboutUs" Component={AboutUsPage} />
-          <Route path="/cart" Component={Cart} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/aboutUs" element={<AboutUsPage />} />
+          <Route path="/myOrders" element={<MyOrders />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
-      </Provider>
-    </>
+      </GoogleOAuthProvider>
+    </Provider>
   );
 }
 

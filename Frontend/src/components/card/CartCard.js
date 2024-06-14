@@ -8,14 +8,14 @@ import {
 import { Remove, Add, Delete, Close } from "../../utils/icons/Icons";
 
 const CartItemCard = ({ item }) => {
-  console.log(item);
+  const user = JSON.parse(localStorage.getItem("user"));
   const [isSliding, setIsSliding] = useState(false);
   const dispatch = useDispatch();
 
   const handleDecrement = () => {
     if (item.quantity === 1) {
-      dispatch(removeItem(item.id, item.selectedOption));
-    } else dispatch(decreaseQuantity(item.id, item.selectedOption));
+      dispatch(removeItem(item.id, item.selectedOption, user.id));
+    } else dispatch(decreaseQuantity(item.id, item.selectedOption, user.id));
   };
 
   const handleDeleteClick = () => {
@@ -23,7 +23,7 @@ const CartItemCard = ({ item }) => {
   };
 
   const handleRemoveClick = () => {
-    dispatch(removeItem(item.id, item.selectedOption));
+    dispatch(removeItem(item.id, item.selectedOption, user.id));
     setIsSliding(false);
   };
 
