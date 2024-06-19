@@ -15,7 +15,7 @@ const submitOrder = async (req, res) => {
           product_data: {
             name: item.name,
             description: `Price: ${item.selectedPrice}`,
-            images: ["https://example.com/product.png"], // Replace with your product image URL
+            images: [item.imageUrl],
           },
           unit_amount: Math.round(item.selectedPrice * 100), // price in cents
         },
