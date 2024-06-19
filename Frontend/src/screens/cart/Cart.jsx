@@ -73,6 +73,7 @@ const Cart = () => {
       name: item.name,
       selectedPrice: item.selectedPrice,
       quantity: item.quantity,
+      imageUrl: item.image,
     }));
 
     // Create order details object with required fields
@@ -122,26 +123,25 @@ const Cart = () => {
             <div className="flex flex-row justify-between items-center bg-white shadow-md rounded-lg p-4 min-w-fit">
               <div>
                 <span className="text-lg font-bold text-gunmetal">
-                  Subtotal: <span className="text-chilli-red">&#8377; </span>
+                  Subtotal: <span className="text-chilli-red">&#36; </span>
                   {subtotal.toFixed(2)}
                 </span>
                 <div className="mt-2">
                   <span className="text-sm text-gunmetal">
                     CGST ({CGST_PERCENTAGE}%):{" "}
-                    <span className="text-chilli-red">&#8377; </span>
+                    <span className="text-chilli-red">&#36; </span>
                     {cgstAmount.toFixed(2)}
                   </span>
                   <br />
                   <span className="text-sm text-gunmetal">
                     SGST ({SGST_PERCENTAGE}%):{" "}
-                    <span className="text-chilli-red">&#8377; </span>
+                    <span className="text-chilli-red">&#36; </span>
                     {sgstAmount.toFixed(2)}
                   </span>
                 </div>
                 <div className="mt-2">
                   <span className="text-lg font-bold text-gunmetal">
-                    Grand Total:{" "}
-                    <span className="text-chilli-red">&#8377; </span>
+                    Grand Total: <span className="text-chilli-red">&#36; </span>
                     {grandTotal.toFixed(2)}
                   </span>
                 </div>

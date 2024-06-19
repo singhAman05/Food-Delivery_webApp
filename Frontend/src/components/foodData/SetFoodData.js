@@ -15,6 +15,7 @@ const SetFoodItem = () => {
         const response = await axios.get(
           "http://localhost:5000/api/v1/getFoodItems"
         );
+        console.log(response);
         // Check if response.data is an array
         if (Array.isArray(response.data.foodItems)) {
           setFoodItems(response.data.foodItems);

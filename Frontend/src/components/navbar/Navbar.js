@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Loader from "../loader/Loader";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu } from "../../utils/icons/Icons";
-import { logout } from "../../redux/actions/authActions"; // Adjust path as per your project structure
-
+import { logout } from "../../redux/actions/authActions";
+import logo from "../../Images/logo.png";
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ const Navbar = () => {
       <Loader loading={loading} />
       <nav className="bg-gunmetal text-ghost-white flex justify-between items-center p-4 relative z-20">
         <div className="flex items-center">
-          <img src="logo.png" alt="logo" className="w-10 h-10" />
+          <img src={logo} alt="logo" className="w-10 h-10" />
           <span className="ml-2 text-xl font-bold">Crave-Express</span>
         </div>
 
