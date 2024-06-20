@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import OrderCard from "../../components/card/OrderCard"; // Import the OrderCard component
+import OrderCard from "../../components/card/OrderCard";
 
 const MyOrders = () => {
   const navigate = useNavigate();
@@ -22,18 +22,14 @@ const MyOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const token = localStorage.getItem("jwtToken"); // Retrieve JWT token
+        const email = JSON.parse(localStorage.getItem("user")).email;
 
-        const response = await axios.get(
+        const response = await axios.post(
           "http://localhost:5000/api/v1/getUserOrders",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Include JWT token in headers
-            },
-          }
+          { email: email }
         );
-
-        setOrders(response.data);
+        console.log(response.data.orders);
+        setOrders(response.data.orders);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -56,11 +52,11 @@ const MyOrders = () => {
   return (
     <div className="max-w-7xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">My Orders</h1>
-      <div className="flex justify-center flex-wrap mx-4">
+      <div className="flex flex-wrap">
         {orders.map((order) => (
           <div
             key={order._id}
-            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8"
+            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2"
           >
             <OrderCard order={order} onReorder={handleReorder} />
           </div>

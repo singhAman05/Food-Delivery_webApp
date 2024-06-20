@@ -29,7 +29,6 @@ const submitOrder = async (req, res) => {
         selectedPrice: item.selectedPrice,
         imageUrl: item.imageUrl,
       }));
-
       const itemMetadataString = JSON.stringify(itemMetadata);
 
       const session = await stripe.checkout.sessions.create({

@@ -8,7 +8,7 @@ import {
 import { Remove, Add, Delete, Close } from "../../utils/icons/Icons";
 
 const CartItemCard = ({ item }) => {
-  console.log(item.image);
+  // console.log(item.image);
   const user = JSON.parse(localStorage.getItem("user"));
   const [isSliding, setIsSliding] = useState(false);
   const dispatch = useDispatch();

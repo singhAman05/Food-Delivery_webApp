@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AddToCart } from "../../utils/icons/Icons";
@@ -16,7 +16,7 @@ const Card = ({ food }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  console.log(food);
+  // console.log(food);
 
   // Initialize selected option and price based on the first option
   const [selectedOption, setSelectedOption] = useState(food.options[0].name);

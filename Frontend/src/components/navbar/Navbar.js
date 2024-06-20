@@ -71,7 +71,7 @@ const Navbar = () => {
             {isLoggedIn ? (
               <>
                 <li className="mx-3 text-ghost-white hover:text-harvest-gold cursor-pointer">
-                  <Link to="/orders">My Orders</Link>
+                  <Link to="/myOrders">My Orders</Link>
                 </li>
                 <li className="mx-3 text-ghost-white hover:text-harvest-gold cursor-pointer relative">
                   <Link to="/cart">
@@ -123,7 +123,7 @@ const Navbar = () => {
               {isLoggedIn ? (
                 <>
                   <li className="text-ghost-white hover:text-harvest-gold cursor-pointer">
-                    <Link to="/orders" onClick={() => setIsMenuOpen(false)}>
+                    <Link to="/myOrders" onClick={() => setIsMenuOpen(false)}>
                       My Orders
                     </Link>
                   </li>

@@ -3,8 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import image1 from "../../Images/bur.jpg";
-import image2 from "../../Images/shreyak-singh-0j4bisyPo3M-unsplash.jpg";
-import image3 from "../../Images/davide-cantelli-jpkfc5_d-DI-unsplash.jpg";
+import image2 from "../../Images/noodles-7390775.jpg";
+import image3 from "../../Images/salad-374173.jpg";
 import image4 from "../../Images/davide-cantelli-jpkfc5_d-DI-unsplash.jpg"; // Add more images as needed
 
 const Carousel = () => {

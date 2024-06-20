@@ -15,7 +15,6 @@ const SuccessPage = () => {
   const [orderDetails, setOrderDetails] = useState([]);
   const location = useLocation();
 
-  // Memoize options to ensure they do not change between renders
   const loaderOptions = useMemo(
     () => ({
       googleMapsApiKey: apiKey,
@@ -33,8 +32,7 @@ const SuccessPage = () => {
       console.log(sessionId);
       if (!sessionId) {
         console.log("Session ID not found");
-        // Handle the case where sessionId is not present
-        return; // Exit function early
+        return;
       }
 
       try {
@@ -46,7 +44,19 @@ const SuccessPage = () => {
           info
         );
         const orderItems = JSON.parse(response.data.metadata.items);
-        console.log(orderItems); // Logging the response data
+        const firstLoad = !localStorage.getItem("orderSubmitted");
+        const email = JSON.parse(localStorage.getItem("user")).email;
+        console.log(email);
+
+        // Send order details to backend only on first load
+        if (firstLoad) {
+          await axios.post("http://localhost:5000/api/v1/setUserOrders", {
+            orderItems: orderItems,
+            orderDate: new Date().toISOString(),
+            email: email,
+          });
+          localStorage.setItem("orderSubmitted", "true");
+        }
         setOrderDetails(orderItems); // Set order details in state
 
         // Fetch address based on user location

@@ -25,7 +25,6 @@ const Cart = () => {
 
   // Load the cart from localStorage
   useEffect(() => {
-    console.log(user.id);
     if (user) {
       dispatch(loadCart(user.id));
     }
@@ -68,7 +67,7 @@ const Cart = () => {
   const grandTotal = subtotal + cgstAmount + sgstAmount;
 
   const handleOrderNow = async () => {
-    if (selectedOption.toLowerCase() != "card") {
+    if (selectedOption.toLowerCase() !== "card") {
       handleErrors("sorry");
     }
 
@@ -105,7 +104,7 @@ const Cart = () => {
           },
         }
       );
-
+      localStorage.removeItem("orderSubmitted");
       const approvalUrl = response.data.approvalUrl;
       window.location.href = approvalUrl;
     } catch (error) {
