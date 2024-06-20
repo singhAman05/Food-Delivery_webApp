@@ -8,6 +8,7 @@ import {
 import { Remove, Add, Delete, Close } from "../../utils/icons/Icons";
 
 const CartItemCard = ({ item }) => {
+  // console.log(item.image);
   const user = JSON.parse(localStorage.getItem("user"));
   const [isSliding, setIsSliding] = useState(false);
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const CartItemCard = ({ item }) => {
           <span className="text-lg font-bold mx-2">{item.name}</span>
           <span className="text-gunmetal mx-2">{item.selectedOption} </span>
           <span className="text-gunmetal mx-2">
-            <span className="text-gunmetal">&#8377; </span>
+            <span className="text-gunmetal">&#36; </span>
             {item.selectedPrice ? item.selectedPrice.toFixed(2) : "0.00"}
           </span>
         </div>
@@ -84,7 +85,7 @@ const CartItemCard = ({ item }) => {
         </div>
         <div className="flex items-center justify-between w-full md:mt-0">
           <span className="text-gunmetal font-bold">
-            Total: <span className="text-chilli-red"> &#8377; </span>
+            Total: <span className="text-chilli-red"> &#36; </span>
             {item.selectedPrice
               ? (item.selectedPrice * item.quantity).toFixed(2)
               : "0.00"}

@@ -1,4 +1,6 @@
 const FoodItem = require("../database/models/foodItems");
+const path = require("path");
+const { uploadImage } = require("../cloudinary/uploadImage");
 
 const getFoodItems = async (req, res) => {
   try {
@@ -12,8 +14,7 @@ const getFoodItems = async (req, res) => {
 
 const setFoodItems = async (req, res) => {
   try {
-    // Get the array of food items from the request body
-    const foodItemsData = req.body.foodItems; // Access the "foodItems" property
+    const foodItemsData = req.body.foodItems;
 
     // Check if the data is an array
     if (!Array.isArray(foodItemsData)) {
@@ -22,21 +23,36 @@ const setFoodItems = async (req, res) => {
         .json({ message: "Invalid data format. Expected an array." });
     }
 
-    // Save each food item to the database
+    const addFoodItem = async (item) => {
+      try {
+        const imagePath = path.join(__dirname, "../assets", item.image);
+
+        // Upload image to Cloudinary
+        const imageUrl = await uploadImage(imagePath);
+
+        // Create a new FoodItem instance
+        const foodItem = new FoodItem({
+          category: item.category,
+          name: item.name,
+          image: item.image, // Store the original image filename
+          imageUrl: imageUrl, // Set the imageUrl to the Cloudinary URL
+          options: item.options,
+          description: item.description,
+        });
+
+        // Save the food item to the database
+        await foodItem.save();
+        console.log("Food item saved successfully");
+        return foodItem; // Return the saved food item
+      } catch (error) {
+        console.error("Error adding food item:", error);
+        return null; // Return null on error
+      }
+    };
+
+    // Initialize an array to store the results of added food items
     const savedFoodItems = await Promise.all(
-      foodItemsData.map(async (item) => {
-        try {
-          // Create a new FoodItem instance
-          const foodItem = new FoodItem(item);
-          // Save the food item to the database
-          await foodItem.save();
-          return foodItem; // Return the saved food item
-        } catch (error) {
-          // If there's an error saving a food item, return null
-          console.error("Error saving food item:", error);
-          return null;
-        }
-      })
+      foodItemsData.map((item) => addFoodItem(item))
     );
 
     // Filter out any null values from the savedFoodItems array

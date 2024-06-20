@@ -3,25 +3,36 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import image1 from "../../Images/bur.jpg";
-import image2 from "../../Images/shreyak-singh-0j4bisyPo3M-unsplash.jpg";
-import image3 from "../../Images/davide-cantelli-jpkfc5_d-DI-unsplash.jpg";
+import image2 from "../../Images/noodles-7390775.jpg";
+import image3 from "../../Images/salad-374173.jpg";
+import image4 from "../../Images/davide-cantelli-jpkfc5_d-DI-unsplash.jpg"; // Add more images as needed
+
 const Carousel = () => {
-  const card = [
+  const foodItems = [
     {
       image: image1,
-      name: "Card 1",
-      description: "This is Card 1.",
+      name: "Delicious Burger",
+      description:
+        "Juicy beef patty with fresh lettuce, tomato, and melted cheese.",
     },
     {
       image: image2,
-      name: "Card 2",
-      description: "This is Card 2.",
+      name: "Tasty Pasta",
+      description: "Creamy Alfredo pasta with a hint of garlic and basil.",
     },
     {
       image: image3,
-      name: "Card 3",
-      description: "This is Card 3.",
+      name: "Gourmet Salad",
+      description:
+        "Fresh greens topped with crunchy nuts and a tangy vinaigrette.",
     },
+    {
+      image: image4,
+      name: "Succulent Steak",
+      description:
+        "Perfectly grilled steak with a side of mashed potatoes and veggies.",
+    },
+    // Add more items as needed
   ];
 
   const settings = {
@@ -30,15 +41,15 @@ const Carousel = () => {
     slidesToShow: 3,
     infinite: true,
     speed: 500,
-    arrows: false,
+    arrows: true,
     dots: true,
     autoplay: true,
-    autoplaySpeed: 1500, // Auto-slide every 1.5 seconds
+    autoplaySpeed: 2500, // Auto-slide every 2.5 seconds
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           centerMode: true,
         },
       },
@@ -60,26 +71,28 @@ const Carousel = () => {
   };
 
   return (
-    <div className="w-3/4 m-auto">
-      <div className="mt-10 mb-10">
-        <Slider {...settings}>
-          {card.map((data) => (
-            <div className="bg-gray-300 h-[325px] text-black rounded-xl">
-              <div className="h-56 rounded-t-xl bg-gunmetal felx justify-center items-center">
+    <div className="max-w-5xl mx-auto px-4 py-10">
+      <Slider {...settings}>
+        {foodItems.map((item, index) => (
+          <div key={index} className="p-4">
+            <div className="bg-white shadow-md rounded-xl overflow-hidden">
+              <div className="h-56">
                 <img
-                  src={data.image}
-                  alt={data.name}
-                  className="h-full w-full rounded-xl"
+                  src={item.image}
+                  alt={item.name}
+                  className="h-full w-full object-cover"
                 />
               </div>
-              <div className="flex flex-col justify-center items-center gap-4 p-4">
-                <p className="text-xl font-semibold">{data.name}</p>
-                <p>{data.description}</p>
+              <div className="p-4 flex flex-col justify-between">
+                <div>
+                  <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
+                  <p className="text-gray-700 mb-4">{item.description}</p>
+                </div>
               </div>
             </div>
-          ))}
-        </Slider>
-      </div>
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };

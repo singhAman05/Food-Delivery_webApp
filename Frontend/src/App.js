@@ -8,6 +8,8 @@ import { Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import store from "./redux/store.js";
+import SuccessPage from "./screens/capture/Success.jsx";
+import CancelPage from "./screens/capture/Cancel.jsx";
 
 const clientId =
   "19247234044-qvuagd11f0kslaftdjehlmpdngr5clm6.apps.googleusercontent.com";
@@ -22,6 +24,8 @@ function App() {
           <Route path="/aboutUs" element={<AboutUsPage />} />
           <Route path="/myOrders" element={<MyOrders />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/success" element={<SuccessPage />} />
+          <Route path="/cancel" element={<CancelPage />} />
         </Routes>
       </GoogleOAuthProvider>
     </Provider>

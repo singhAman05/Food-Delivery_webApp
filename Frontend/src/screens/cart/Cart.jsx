@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import CartCard from "../../components/card/CartCard";
 import { Checkout } from "../../utils/icons/Icons";
 import PaymentOptions from "../../components/options/PaymentOptions";
-import { loadCart } from "../../redux/actions/cartActions"; // Import loadCart action
+import { loadCart } from "../../redux/actions/cartActions";
+import { handleErrors } from "../../utils/notifications/notify";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -24,7 +25,6 @@ const Cart = () => {
 
   // Load the cart from localStorage
   useEffect(() => {
-    console.log(user.id);
     if (user) {
       dispatch(loadCart(user.id));
     }
@@ -67,12 +67,16 @@ const Cart = () => {
   const grandTotal = subtotal + cgstAmount + sgstAmount;
 
   const handleOrderNow = async () => {
-    // Map cart items to match backend structure
+    if (selectedOption.toLowerCase() !== "card") {
+      handleErrors("sorry");
+    }
+
     const formattedItems = cart.map((item) => ({
       id: parseInt(item.id),
       name: item.name,
       selectedPrice: item.selectedPrice,
       quantity: item.quantity,
+      imageUrl: item.image,
     }));
 
     // Create order details object with required fields
@@ -100,7 +104,7 @@ const Cart = () => {
           },
         }
       );
-
+      localStorage.removeItem("orderSubmitted");
       const approvalUrl = response.data.approvalUrl;
       window.location.href = approvalUrl;
     } catch (error) {
@@ -122,29 +126,28 @@ const Cart = () => {
             <div className="flex flex-row justify-between items-center bg-white shadow-md rounded-lg p-4 min-w-fit">
               <div>
                 <span className="text-lg font-bold text-gunmetal">
-                  Subtotal: <span className="text-chilli-red">&#8377; </span>
+                  Grand-Total: <span className="text-chilli-red">&#36; </span>
                   {subtotal.toFixed(2)}
                 </span>
-                <div className="mt-2">
+                {/* <div className="mt-2">
                   <span className="text-sm text-gunmetal">
                     CGST ({CGST_PERCENTAGE}%):{" "}
-                    <span className="text-chilli-red">&#8377; </span>
+                    <span className="text-chilli-red">&#36; </span>
                     {cgstAmount.toFixed(2)}
                   </span>
                   <br />
                   <span className="text-sm text-gunmetal">
                     SGST ({SGST_PERCENTAGE}%):{" "}
-                    <span className="text-chilli-red">&#8377; </span>
+                    <span className="text-chilli-red">&#36; </span>
                     {sgstAmount.toFixed(2)}
                   </span>
-                </div>
-                <div className="mt-2">
+                </div> */}
+                {/* <div className="mt-2">
                   <span className="text-lg font-bold text-gunmetal">
-                    Grand Total:{" "}
-                    <span className="text-chilli-red">&#8377; </span>
+                    Grand Total: <span className="text-chilli-red">&#36; </span>
                     {grandTotal.toFixed(2)}
                   </span>
-                </div>
+                </div> */}
               </div>
               {/* Render PaymentOptions component */}
               <div className="mt-4 self-center">

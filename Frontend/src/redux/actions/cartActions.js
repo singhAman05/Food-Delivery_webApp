@@ -16,7 +16,6 @@ export const loadCart = (userId) => {
 
 // Add an item to the cart and save to localStorage
 export const addToCart = (food) => (dispatch, getState) => {
-  // console.log("Received food in addToCart action:", food);
   const { id, name, image, selectedOption, selectedPrice, userId } = food;
 
   dispatch({

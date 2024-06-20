@@ -29,12 +29,14 @@ const foodItems = require("./routes/foodDataRoute");
 const paymentOptions = require("./routes/paymentOptionsRoute");
 const cardCheckout = require("./routes/paymentsRoute/cardRoute");
 const userOrders = require("./routes/orderRoute");
+const addSubscriber = require("./routes/subscriberRoute");
 
 app.use("/api/v1", userAuth);
 app.use("/api/v1", foodItems);
 app.use("/api/v1", paymentOptions);
 app.use("/api/v1/Card", cardCheckout);
 app.use("/api/v1", userOrders);
+app.use("/api/v1", addSubscriber);
 
 //accessing local backend index server
 app.get("/", (req, res) => {

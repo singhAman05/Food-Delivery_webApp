@@ -24,7 +24,7 @@ const authReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
     case SIGNUP_SUCCESS:
       // Store user data and token in localStorage
-      console.log(action.payload);
+      // console.log(action.payload);
       localStorage.setItem("user", JSON.stringify(action.payload.user));
       localStorage.setItem("jwtToken", action.payload.token);
       return {

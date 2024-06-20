@@ -1,37 +1,36 @@
+// components/card/OrderCard.js
 import React from "react";
 
-// OrderCard component to display individual order details
 const OrderCard = ({ order, onReorder }) => {
+  const { orderItems, orderDate, _id } = order;
+
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-4 w-full h-80 flex flex-col justify-between">
-      <div>
-        <h2 className="text-lg text-gunmetal font-semibold mb-2 truncate">
-          Order ID: {order._id}
-        </h2>
-        <div className="overflow-y-auto h-48 scrollbar-hide">
-          <ul>
-            {order.items.map((item, index) => (
-              <li key={index} className="mb-2">
-                <div className="flex justify-between">
-                  <span className="text-left">{item.name}</span>
-                  <span className="text-right text-gunmetal">
-                    x{item.quantity}
-                  </span>
-                </div>
-                <div className="flex justify-between text-sm text-gray-600">
-                  <span>Price:</span>
-                  <span className="text-chilli-red">₹{item.selectedPrice}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+    <div className="bg-white p-4 shadow-lg rounded-lg">
+      <h3 className="text-lg font-semibold mb-2">Order ID: {_id}</h3>
+      <p className="text-gray-600 mb-2">
+        Order Date: {new Date(orderDate).toLocaleDateString()}
+      </p>
+      <ul className="mb-4">
+        {orderItems.map((item, index) => (
+          <li key={index} className="flex items-center mb-2">
+            <img
+              src={item.imageUrl}
+              alt={item.name}
+              className="w-16 h-16 object-cover rounded mr-4"
+            />
+            <div>
+              <p className="text-gray-800">{item.name}</p>
+              <p className="text-gray-600">Quantity: {item.quantity}</p>
+              <p className="text-gray-600">Price: ${item.selectedPrice}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
       <button
         onClick={() => onReorder(order)}
-        className="hover:bg-chilli-red bg-harvest-gold text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 self-end"
+        className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
       >
-        Re-Order
+        Reorder
       </button>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AddToCart } from "../../utils/icons/Icons";
@@ -16,6 +16,7 @@ const Card = ({ food }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  // console.log(food);
 
   // Initialize selected option and price based on the first option
   const [selectedOption, setSelectedOption] = useState(food.options[0].name);
@@ -35,7 +36,7 @@ const Card = ({ food }) => {
     setLoading(true);
 
     // console.log(user);
-    if (!user.id) {
+    if (!user) {
       console.error("User not logged in");
       navigate("/login");
       return;
@@ -45,7 +46,7 @@ const Card = ({ food }) => {
     const foodWithId = {
       id: food._id,
       name: food.name,
-      image: food.image,
+      image: food.imageUrl,
       selectedOption,
       selectedPrice,
       quantity: 1,
@@ -84,13 +85,13 @@ const Card = ({ food }) => {
       <Loader loading={loading} />
       <div className="max-w-sm h-96 rounded overflow-hidden shadow-xl m-4 transition-transform transform hover:scale-105 flex flex-col justify-between">
         <img
-          src={food.image}
+          src={food.imageUrl}
           alt={food.name}
           className="w-full h-40 object-cover"
         />
         <div className="px-6 py-4 flex-1 overflow-hidden">
           <h2 className="font-bold text-xl mb-2">{food.name}</h2>
-          <div className="overflow-y-auto h-20">
+          <div className="overflow-y-auto scrollbar-hide h-20">
             <p className="text-gunmetal text-base">{food.description}</p>
           </div>
           <OptionsMenu
@@ -101,7 +102,7 @@ const Card = ({ food }) => {
         </div>
         <div className="px-6 pt-4 pb-2 flex justify-between items-center">
           <span className="text-xl font-bold text-gunmetal">
-            <span className="text-chilli-red">&#8377; </span>
+            <span className="text-chilli-red">&#36; </span>
             {selectedPrice ? selectedPrice.toFixed(2) : ""}
           </span>
           {quantity > 0 ? (

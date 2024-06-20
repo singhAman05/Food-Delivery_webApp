@@ -10,6 +10,6 @@ const store = configureStore({
   // Add middleware, devTools, etc. as needed
 });
 
-console.log("items received at store");
+// console.log("items received at store");
 
 export default store;

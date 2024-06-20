@@ -22,7 +22,7 @@ const cartReducer = (state = initialState, action) => {
       };
 
     case ADD_TO_CART:
-      console.log(action.payload.userId);
+      // console.log(action.payload.userId);
       const updatedCart = [...state.cart, action.payload.item];
       localStorage.setItem(
         `cart_${action.payload.userId}`,
@@ -34,7 +34,7 @@ const cartReducer = (state = initialState, action) => {
       };
 
     case INCREASE_QUANTITY:
-      console.log(action.payload.userId);
+      // console.log(action.payload.userId);
       const updatedIncreaseCart = state.cart.map((item) =>
         item.id === action.payload.id &&
         item.selectedOption === action.payload.selectedOption
@@ -51,7 +51,7 @@ const cartReducer = (state = initialState, action) => {
       };
 
     case DECREASE_QUANTITY:
-      console.log(action.payload.userId);
+      // console.log(action.payload.userId);
       const updatedDecreaseCart = state.cart.map((item) =>
         item.id === action.payload.id &&
         item.selectedOption === action.payload.selectedOption
