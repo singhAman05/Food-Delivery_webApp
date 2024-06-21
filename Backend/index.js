@@ -7,12 +7,22 @@ const port = process.env.SERVER_PORT || 5000;
 require("./database/connection/conn");
 const errorHandler = require("./middleware/errorMiddleware");
 
-//to access react api in our system of backend
+const allowedOrigins = [
+  "http://localhost:3000", // Development
+  "https://your-frontend-domain.vercel.app", // Replace with your production frontend URL
+];
 app.use(
   cors({
-    origin: "http://localhost:3000", // Allow only specific origin for development
-    // origin: '*', // Allow all origins (use with caution)
-    credentials: true, // Allow cookies and other credentials in requests
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        // If a specific origin isn't found in allowed origins
+        return callback(new Error("Not allowed by CORS"), false);
+      }
+      return callback(null, true);
+    },
+    credentials: true, // Allow cookies to be sent in CORS requests
   })
 );
 
