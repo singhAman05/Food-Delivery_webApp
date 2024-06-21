@@ -8,15 +8,13 @@ require("./database/connection/conn");
 const errorHandler = require("./middleware/errorMiddleware");
 
 //to access react api in our system of backend
-app.use(cors());
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow only specific origin for development
+    // origin: '*', // Allow all origins (use with caution)
+    credentials: true, // Allow cookies and other credentials in requests
+  })
+);
 
 //using json files
 app.use(express.json());
