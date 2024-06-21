@@ -7,24 +7,28 @@ const port = process.env.SERVER_PORT || 5000;
 require("./database/connection/conn");
 const errorHandler = require("./middleware/errorMiddleware");
 
-const allowedOrigins = [
-  "http://localhost:3000", // Development
-  "https://your-frontend-domain.vercel.app", // Replace with your production frontend URL
-];
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        // If a specific origin isn't found in allowed origins
-        return callback(new Error("Not allowed by CORS"), false);
-      }
-      return callback(null, true);
-    },
-    credentials: true, // Allow cookies to be sent in CORS requests
-  })
-);
+//to access react api in our system of backend
+// Middleware to handle CORS
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    "http://localhost:3000", // Development
+    "https://your-frontend-domain.vercel.app", // Production
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Credentials", "true"); // if you want to allow cookies
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204); // No content for preflight requests
+  }
+  next();
+});
 
 //using json files
 app.use(express.json());
