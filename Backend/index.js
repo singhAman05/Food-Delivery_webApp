@@ -7,14 +7,7 @@ const port = process.env.SERVER_PORT || 5000;
 require("./database/connection/conn");
 const errorHandler = require("./middleware/errorMiddleware");
 
-//to access react api in our system of backend
-const corsOptions = {
-  origin: "http://localhost:3000/",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"],
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 //using json files
 app.use(express.json());
