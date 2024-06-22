@@ -13,10 +13,8 @@ const SetFoodItem = () => {
     const fetchFoodItems = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/getFoodItems"
+          `https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1/getFoodItems`
         );
-        // console.log(response);
-        // Check if response.data is an array
         if (Array.isArray(response.data.foodItems)) {
           setFoodItems(response.data.foodItems);
         } else {

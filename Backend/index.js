@@ -8,25 +8,16 @@ require("./database/connection/conn");
 const errorHandler = require("./middleware/errorMiddleware");
 
 //to access react api in our system of backend
-// Middleware to handle CORS
+app.use(cors());
 app.use((req, res, next) => {
-  const allowedOrigins = [
-    "http://localhost:3000", // Development
-    "https://your-frontend-domain.vercel.app", // Production
-  ];
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://crave-express-woad.vercel.app"
+  );
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Credentials", "true"); // if you want to allow cookies
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(204); // No content for preflight requests
-  }
   next();
 });
 
