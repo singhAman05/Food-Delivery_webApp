@@ -11,8 +11,7 @@ import {
 import { handleSuccess } from "../../utils/notifications/notify";
 
 // API URL
-const API_URL =
-  "https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1";
+const API_URL = "https://crave-express-server.onrender.com/api/v1";
 
 // Action Creators
 export const login = (email, password) => async (dispatch) => {

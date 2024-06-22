@@ -95,7 +95,7 @@ const Cart = () => {
       const token = localStorage.getItem("jwtToken");
 
       const response = await axios.post(
-        `https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1/${selectedOption}/payment`,
+        `https://crave-express-server.onrender.com/api/v1/${selectedOption}/payment`,
         orderDetails,
         {
           headers: {

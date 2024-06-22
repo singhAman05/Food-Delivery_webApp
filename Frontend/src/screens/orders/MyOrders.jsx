@@ -25,7 +25,7 @@ const MyOrders = () => {
         const email = JSON.parse(localStorage.getItem("user")).email;
 
         const response = await axios.post(
-          "https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1/getUserOrders",
+          "https://crave-express-server.onrender.com/api/v1/getUserOrders",
           { email: email }
         );
         console.log(response.data.orders);

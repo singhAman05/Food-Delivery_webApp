@@ -40,7 +40,7 @@ const SuccessPage = () => {
           sessionId: sessionId,
         };
         const response = await axios.post(
-          `https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1/Card/retrieve_session`,
+          `https://crave-express-server.onrender.com/api/v1/Card/retrieve_session`,
           info
         );
         const orderItems = JSON.parse(response.data.metadata.items);
@@ -51,7 +51,7 @@ const SuccessPage = () => {
         // Send order details to backend only on first load
         if (firstLoad) {
           await axios.post(
-            "https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1/setUserOrders",
+            "https://crave-express-server.onrender.com/api/v1/setUserOrders",
             {
               orderItems: orderItems,
               orderDate: new Date().toISOString(),

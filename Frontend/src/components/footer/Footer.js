@@ -26,7 +26,7 @@ const Footer = () => {
     try {
       // Replace with your backend API URL
       const response = await axios.post(
-        "https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1/addSubscriber",
+        "https://crave-express-server.onrender.com/api/v1/addSubscriber",
         { email }
       );
       console.log(response);
