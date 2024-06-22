@@ -12,7 +12,7 @@ app.use(cors());
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://crave-express-woad.vercel.app"
+    "https://crave-express-nine.vercel.app"
   );
   res.header(
     "Access-Control-Allow-Headers",
