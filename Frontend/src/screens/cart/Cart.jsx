@@ -35,7 +35,7 @@ const Cart = () => {
     const fetchPaymentOptions = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/v1/getPaymentOptions"
+          "https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1/getPaymentOptions"
         );
         setPaymentOptions(res.data.paymentOptions || []);
       } catch (error) {
@@ -95,7 +95,7 @@ const Cart = () => {
       const token = localStorage.getItem("jwtToken");
 
       const response = await axios.post(
-        `http://localhost:5000/api/v1/${selectedOption}/payment`,
+        `https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1/${selectedOption}/payment`,
         orderDetails,
         {
           headers: {
