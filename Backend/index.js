@@ -8,16 +8,13 @@ require("./database/connection/conn");
 const errorHandler = require("./middleware/errorMiddleware");
 
 //to access react api in our system of backend
-app.use(cors());
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://crave-express-nine.vercel.app"
-  ); // Replace with your frontend domain
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
+const corsOptions = {
+  origin: "http://localhost:3000/",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+};
+
+app.use(cors(corsOptions));
 
 //using json files
 app.use(express.json());

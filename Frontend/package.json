@@ -1,5 +1,6 @@
 {
   "name": "react_frontend",
+  "proxy": "https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
