@@ -40,7 +40,7 @@ const SuccessPage = () => {
           sessionId: sessionId,
         };
         const response = await axios.post(
-          `http://localhost:5000/api/v1/Card/retrieve_session`,
+          `https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1/Card/retrieve_session`,
           info
         );
         const orderItems = JSON.parse(response.data.metadata.items);
@@ -50,11 +50,14 @@ const SuccessPage = () => {
 
         // Send order details to backend only on first load
         if (firstLoad) {
-          await axios.post("http://localhost:5000/api/v1/setUserOrders", {
-            orderItems: orderItems,
-            orderDate: new Date().toISOString(),
-            email: email,
-          });
+          await axios.post(
+            "https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1/setUserOrders",
+            {
+              orderItems: orderItems,
+              orderDate: new Date().toISOString(),
+              email: email,
+            }
+          );
           localStorage.setItem("orderSubmitted", "true");
         }
         setOrderDetails(orderItems); // Set order details in state
