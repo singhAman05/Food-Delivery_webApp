@@ -35,7 +35,7 @@ const Cart = () => {
     const fetchPaymentOptions = async () => {
       try {
         const res = await axios.get(
-          "https://craveexpressserver-git-master-amans-projects-4ae4e25a.vercel.app/api/v1/getPaymentOptions"
+          "https://crave-express-server.onrender.com/api/v1/getPaymentOptions"
         );
         setPaymentOptions(res.data.paymentOptions || []);
       } catch (error) {
